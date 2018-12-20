@@ -1,0 +1,95 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../practica1/practica1-element.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<dom-module id="practica1-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      #signin{
+        display: none;
+      }
+    </style>
+    <div id="login">
+      <h2>Login</h2>
+      <p>¿No tienes cuenta ? Da Click<paper-button on-tap="toggle">aquí</paper-button></p>
+      <paper-input label="User Name" value="{{username}}"></paper-input>
+      <paper-input label="Password" type="password" value="{{password}}"></paper-input>
+      <paper-button on-tap="login">Iniciar Sesion</paper-button>
+  </div>
+  <div id="signin">
+    <h2>Registrate</h2><paper-button on-tap="toggleRegister">aquí</paper-button>
+    <paper-input label="Complete Name" value="{{newUser}}"></paper-input>
+    <paper-input label="email"></paper-input>
+    <paper-input label="Password" type="password" value="{{regPassword}}"></paper-input>
+    <paper-input label="Confirm Password" type="password" value="{{confirmPassword}}"></paper-input>
+    <paper-button on-tap="sign">register</paper-button>
+  </div>
+  </template>
+
+  <script>
+    /**
+     * `practica1-element`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class Practica1Element extends Polymer.Element {
+      static get is() { return 'practica1-element'; }
+      static get properties() {
+        return {
+          username: {
+            type: String,
+            value: ''
+          },
+          password:{
+            type: String,
+            value: ''
+          },
+          regPassword:{
+            type: String,
+            value: ''
+          },
+          confirmPassword:{
+            type: String,
+            value:''
+          },
+          newUser:{
+            type: String,
+            value: ''
+          }
+        };
+      }
+      login(){
+        alert('usuario : '+ this.username + ' passworrd: ' + this.password);
+      }
+      toggle(){
+          const signi = this.shadowRoot.querySelector('#signin');
+          signi.style.display = "block";
+          const hiden = this.shadowRoot.querySelector('#login');
+          hiden.style.display = "none";
+      }
+      toggleRegister(){
+        const log = this.shadowRoot.querySelector("#login");
+        log.style.display = "block";
+        const shows = this.shadowRoot.querySelector("#signin");
+        shows.style.display = "none";
+      }
+      sign(){
+        if(this.RegPassword == this.confirmPassword){
+          alert("Complete Sign: " + this.newUser);
+        }
+        else{
+          alert("Password Incorrect");
+        }
+      }
+    }
+
+    window.customElements.define(Practica1Element.is, Practica1Element);
+  </script>
+</dom-module>
