@@ -16,15 +16,15 @@
     <div id="login">
       <h2>Login</h2>
       <p>¿No tienes cuenta ? Da Click<paper-button on-tap="toggle">aquí</paper-button></p>
-      <paper-input label="User Name" value="{{username}}"></paper-input>
-      <paper-input label="Password" type="password" value="{{password}}"></paper-input>
+      <paper-input label="User Name" value="{{login.username}}"></paper-input>
+      <paper-input label="Password" type="password" value="{{login.password}}"></paper-input>
       <paper-button on-tap="login">Iniciar Sesion</paper-button>
   </div>
   <div id="signin">
     <h2>Registrate</h2><paper-button on-tap="toggleRegister">aquí</paper-button>
     <paper-input label="Complete Name" value="{{newUser}}"></paper-input>
     <paper-input label="email"></paper-input>
-    <paper-input label="Password" type="password" value="{{regPassword}}"></paper-input>
+    <paper-input label="Password" type="password" value="{{Password}}"></paper-input>
     <paper-input label="Confirm Password" type="password" value="{{confirmPassword}}"></paper-input>
     <paper-button on-tap="sign">register</paper-button>
   </div>
@@ -43,18 +43,23 @@
       static get is() { return 'practica1-element'; }
       static get properties() {
         return {
-          username: {
-            type: String,
-            value: ''
+          login:{
+            username: {
+              type: String,
+              value: ''
+            },
+          
+            password:{
+              type: String,
+              value: ''
+            },
           },
+          
           password:{
             type: String,
             value: ''
           },
-          regPassword:{
-            type: String,
-            value: ''
-          },
+
           confirmPassword:{
             type: String,
             value:''
@@ -66,7 +71,11 @@
         };
       }
       login(){
-        alert('usuario : '+ this.username + ' passworrd: ' + this.password);
+        if(this.login.username === 'alejandro88' && this.login.password === '1234'){
+        alert('Usuario registrado' + this.login.username);
+        } else {
+        alert('Contraseña y/o usuario incorrecto' + this.login.username);
+        }
       }
       toggle(){
           const signi = this.shadowRoot.querySelector('#signin');
@@ -81,7 +90,7 @@
         shows.style.display = "none";
       }
       sign(){
-        if(this.RegPassword == this.confirmPassword){
+        if(this.Password === this.confirmPassword){
           alert("Complete Sign: " + this.newUser);
         }
         else{
