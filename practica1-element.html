@@ -18,7 +18,7 @@
       <p>¿No tienes cuenta ? Da Click<paper-button on-tap="toggle">aquí</paper-button></p>
       <paper-input label="User Name" value="{{login.username}}"></paper-input>
       <paper-input label="Password" type="password" value="{{login.password}}"></paper-input>
-      <paper-button on-tap="login">Iniciar Sesion</paper-button>
+      <paper-button on-tap="logIn">Iniciar Sesion</paper-button>
   </div>
   <div id="signin">
     <h2>Registrate</h2><paper-button on-tap="toggleRegister">aquí</paper-button>
@@ -44,15 +44,14 @@
       static get properties() {
         return {
           login:{
-            username: {
-              type: String,
-              value: ''
-            },
-          
-            password:{
-              type: String,
-              value: ''
-            },
+            type:Object,
+            value(){
+              return {
+                username: "",
+                password:"",
+              }
+            }
+            
           },
           
           password:{
@@ -70,12 +69,18 @@
           }
         };
       }
-      login(){
+      logIn(){
         if(this.login.username === 'alejandro88' && this.login.password === '1234'){
         alert('Usuario registrado' + this.login.username);
         } else {
         alert('Contraseña y/o usuario incorrecto' + this.login.username);
         }
+        this.dispatchEvent(new CustomEvent("login-user",{
+          bubbles:false,
+          composed:false,
+          detail: this.login
+        }));
+
       }
       toggle(){
           const signi = this.shadowRoot.querySelector('#signin');

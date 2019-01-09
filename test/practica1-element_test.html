@@ -13,39 +13,36 @@
   </head>
   <body>
 
-    <test-fixture id="BasicTestFixture">
+  
+    <test-fixture id="ChangedUser">
       <template>
         <practica1-element></practica1-element>
       </template>
     </test-fixture>
 
-    <test-fixture id="ChangedPropertyTestFixture">
-      <template>
-        <practica1-element prop1="new-prop1"></practica1-element>
-      </template>
-    </test-fixture>
 
     <script>
       suite('practica1-element', () => {
-
-        test('instantiating the element with default properties works', () => {
-          const element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'practica1-element');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello practica1-element!');
+        test('check event for login userName',(done)=>{
+          const loginComponent = fixture('ChangedUser');
+          loginComponent.set("login", { username: 'pedro', password: '1234' });
+          loginComponent.addEventListener("login-user",(event)=>{
+            assert.equal(event.detail.username,"pedro")
+            done();
+          });
+          loginComponent.logIn();
         });
 
-        test('setting a property on the element works', () => {
-          // Create a test fixture
-          const element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
-        });
-
-      });
+        /*test('check event for login in password',(done)=>{
+          const loginComponent  =fixture("LoginPass");
+          loginComponent.addEventListener("login-user",(event)=>{
+            assert.equal(event.detail.password,"1234")
+            done();
+          });
+          loginComponent.logIn();
+        });*/
+        
+    });
     </script>
 
   </body>
