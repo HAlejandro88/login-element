@@ -101,6 +101,11 @@
         else{
           alert("Password Incorrect");
         }
+        this.dispatchEvent(new CustomEvent('user-signIn',{
+          bubbles:false,
+          composed:false,
+          detail: this.password
+        }));
       }
     }
 

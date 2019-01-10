@@ -16,14 +16,14 @@
   
     <test-fixture id="ChangedUser">
       <template>
-        <practica1-element></practica1-element>
+        <practica1-element password="1234"></practica1-element>
       </template>
     </test-fixture>
 
 
     <script>
       suite('practica1-element', () => {
-        test('check event for login userName',(done)=>{
+        /*test('check event for login userName',(done)=>{
           const loginComponent = fixture('ChangedUser');
           loginComponent.set("login", { username: 'pedro', password: '1234' });
           loginComponent.addEventListener("login-user",(event)=>{
@@ -31,16 +31,16 @@
             done();
           });
           loginComponent.logIn();
-        });
+        });*/
 
-        /*test('check event for login in password',(done)=>{
-          const loginComponent  =fixture("LoginPass");
-          loginComponent.addEventListener("login-user",(event)=>{
-            assert.equal(event.detail.password,"1234")
+        test('check password',(done)=>{
+          const loginComponent = fixture('ChangedUser');
+          loginComponent.addEventListener("user-signIn",event=>{
+            assert.equal(event.detail,"1234")
             done();
           });
-          loginComponent.logIn();
-        });*/
+          loginComponent.sign();
+        });
         
     });
     </script>
